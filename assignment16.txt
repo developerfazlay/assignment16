@@ -1,0 +1,73 @@
+
+
+<!-- Created Database -->
+CREATE DATABASE information
+
+
+
+
+<!-- users table creation -->
+CREATE TABLE users (
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    username varchar(255) NOT NULL,
+    created_at timestamp NOT NULL DEFAULT current_timestamp(),
+    
+    );
+
+
+<!-- Inserted users -->
+INSERT INTO `users`(`username`) VALUES ('Fazlay'), ('Morium'), ('Rabbi'), ('Noyon'), ('Mahin'), ('Alvi')
+
+
+
+
+
+
+
+
+<!-- user_details table creation -->
+CREATE TABLE user_details(
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    users_id int,
+    date_of_birth date NOT NULL,
+    phone varchar(20),
+    address varchar(255),
+    country varchar(50),
+    updated_at timestamp DEFAULT current_timestamp(),
+
+    FOREIGN KEY (users_id) REFERENCES users(id)
+
+
+)
+
+
+
+<!-- Inserted user_details -->
+
+INSERT INTO `user_details`(`users_id`, `date_of_birth`, `phone`, `address`, `country`) VALUES ('1','1994-12-16','01944160500','Melandah','Bangladesh'), ('2','1992-12-16','01793469325','Bakshiganj','India'), ('4','1996-12-16','01789165666','Dewanganj','Bangladesh'), ('5','2006-05-10','01633702451','Bakshiganj','India')
+
+
+
+
+
+
+
+
+
+<!-- Inner Join  -->
+SELECT users.username, user_details.phone, user_details.country from user_details INNER JOIN users ON user_details.users_id = users.id
+
+
+
+
+<!-- LEFT Join  -->
+
+SELECT users.username, user_details.phone, user_details.country from user_details LEFT JOIN users ON user_details.users_id = users.id
+
+
+
+<!-- Right Join  -->
+SELECT users.username, user_details.phone, user_details.country from user_details RIGHT JOIN users ON user_details.users_id = users.id
+
+
+
